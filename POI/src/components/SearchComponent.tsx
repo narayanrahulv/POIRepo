@@ -72,7 +72,7 @@ export default class SearchComponent extends Component<{navigation?: any}, Props
         let poiSearchResultsRetrieved = [];
 
         try {
-            poiSearchResultsRetrieved = await this.poiService.getRemoteSearchResults(poiSearchRequest);
+            poiSearchResultsRetrieved = await this.poiService.retrieveSearchResults(poiSearchRequest);
 
             for (let s = 0; s < poiSearchResultsRetrieved.results.length; s++) {
                 let poiEntity: POIEntity = { name: "", categories: [] };
@@ -140,9 +140,15 @@ export default class SearchComponent extends Component<{navigation?: any}, Props
                                 <View>
                                     <Text style={localstyles.label}>POI categories: </Text>
                                 </View>
-                                <View>
-                                    <Text>{result.poiDetails.categories}</Text>
-                                </View>
+                                {
+                                    result.poiDetails.categories.map(category => {
+                                        return(
+                                            <View>
+                                                <Text>{category + ","}</Text>
+                                            </View>
+                                        )
+                                    })
+                                }
                                 <View>
                                     <Text style={localstyles.label}>POI address: </Text>
                                 </View>

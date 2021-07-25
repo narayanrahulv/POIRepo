@@ -10,15 +10,7 @@ import { POISearchResponse } from '../models/response/search/POISearchResponse';
 import { poiSearchParameters } from '../../StaticConfig';
 
 export class POIService{
-    public returnSearchResults(): string[] {
-        var searchResultsReturned: string[];
-
-        searchResultsReturned = ["search result 1", "search result 2", "search result 3", "search result 4", "search result 5"]
-
-        return searchResultsReturned;
-    }
-
-    public async getRemoteSearchResults(poiSearchRequest: POISearchRequest): Promise<any> {
+    public async retrieveSearchResults(poiSearchRequest: POISearchRequest): Promise<any> {
         let poiRequestApiUrl: string;
 
         //create the request URL
