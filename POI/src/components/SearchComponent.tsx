@@ -11,6 +11,9 @@ import { POISearchResponse } from '../models/response/search/POISearchResponse';
 import { POIEntity } from '../models/response/general/POIEntity';
 import { POIAddressEntity } from '../models/response/general/POIAddressEntity';
 
+// Misc functions
+import { displayedErrorMessage } from '../misc/HelperFunctions';
+
 // Constants
 import { standardErrors, poiSearchParameters } from '../../StaticConfig';
 
@@ -95,9 +98,20 @@ export default class SearchComponent extends Component<{navigation?: any}, Props
             });
         }
         catch (e) {
+            let displayedError: string;
+
+            //check to see if we get an error status code from the service and display the errorText based on that
+            if (poiSearchResultsRetrieved.status !== undefined) {
+                displayedError = displayedErrorMessage(poiSearchResultsRetrieved.status);
+            }
+            else {
+                displayedError = "Something went wrong while processing your request. Ensure that your parameters are correct in the staticconfig file";
+                //note: also an error that will be replaced by something more relevant in a production app
+            }
+
             this.setState({
                 isError: true,
-                errorText: "something went wrong while processing your request"
+                errorText: displayedError
             });
         }
     }

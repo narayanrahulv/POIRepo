@@ -15,7 +15,7 @@ export const poiSearchParameters = {
         limit: "limit=5",
         latlon: {
             lat: "lat=37.337",
-            lon: "lon=-121.89"
+            lon: "lon=-1201.89"
         }   
     },
     otherlatlonTestValues: {

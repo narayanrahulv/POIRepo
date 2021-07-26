@@ -9,7 +9,7 @@ import { POISearchResponse } from '../models/response/search/POISearchResponse';
 // Constants
 import { poiSearchParameters } from '../../StaticConfig';
 
-export class POIService{
+export class POIService {
     public async retrieveSearchResults(poiSearchRequest: POISearchRequest): Promise<any> {
         let poiRequestApiUrl: string;
 
@@ -26,6 +26,9 @@ export class POIService{
             method: 'GET'
         });
 
+        if (!poiApiResponse.ok)
+            return poiApiResponse;
+        
         let retrievedPoiResults = await poiApiResponse.json();
 
         return retrievedPoiResults;
